@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="sachinCntrl">
+<p>Sachin scores during series : {{seriesOfRuns}};</p><br>
+<p>No.of times lowest scored records:{{lowestScoreCount}}</p><br>
+<p>No.of times highest scored records:{{highestScoreCount}}</p><br>
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('sachinCntrl', function($scope) {
+    $scope.seriesOfRuns = [10,5,20,20,4,5,2,25,1];
+    $scope.lowestScoreCount = 0;
+    $scope.highestScoreCount = 0;
+     if($scope.seriesOfRuns[0] > $scope.seriesOfRuns[1]){
+      		var highestScore = $scope.seriesOfRuns[0];
+            var lowestScore = $scope.seriesOfRuns[1];
+            $scope.lowestScoreCount++;
+      }else if($scope.seriesOfRuns[0] < $scope.seriesOfRuns[1]){
+      		var highestScore = $scope.seriesOfRuns[1];
+            var lowestScore = $scope.seriesOfRuns[0];
+            $scope.highestScoreCount ++;
+      }
+    
+    
+    for(var i=2;i <= $scope.seriesOfRuns.length-1;i++){
+      if(highestScore < $scope.seriesOfRuns[i] && highestScore != $scope.seriesOfRuns[i]){
+           highestScore = $scope.seriesOfRuns[i];
+           $scope.highestScoreCount = $scope.highestScoreCount +1;
+      }
+      
+      if(lowestScore > $scope.seriesOfRuns[i] && lowestScore != $scope.seriesOfRuns[i]){
+           lowestScore = $scope.seriesOfRuns[i];
+           $scope.lowestScoreCount = $scope.lowestScoreCount +1;
+      }
+      
+      
+    }
+});
+</script>
+
+</body>
+</html>
